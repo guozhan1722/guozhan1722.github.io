@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/
+/MyWebPage/.vs/myWebPage.slnx
+/MyWebPage/myWebPage/bin/
+/MyWebPage/myWebPage/obj/
+/MyWebPage/myWebPage.Client/bin/
+/MyWebPage/myWebPage.Client/obj/
