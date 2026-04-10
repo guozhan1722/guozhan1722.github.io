@@ -1,0 +1,26 @@
+name: Deploy to Github pages
+
+# Run workflow on push to the dev1 branch
+on:
+  push:
+    branches:
+      - dev1
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up .Net Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '9.0.x'
+      - name: Publish dotnet core project
+        run: dotnet publish -c Release -o release --nologo
+      - name: Add .nojekyll file
+        run: touch release/wwwroot/.nojekyll
+      - name: Commit wwwroot to GitHub pages branch
+        uses: JamesIves/github-pages-deploy-action@4.1.2
+        with:
+          branch: dev2
+          folder: release/wwwroot
