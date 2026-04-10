@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: '9.0.x'
       - name: Publish dotnet core project
-        run: dotnet publish MyGithubPage\MyGithubPage.slnx -c Release -o release --nologo
+        run: dotnet publish ./MyGithubPage/MyGithubPage.slnx -c Release -o release --nologo
       - name: Add .nojekyll file
         run: touch release/wwwroot/.nojekyll
       - name: Commit wwwroot to GitHub pages branch
