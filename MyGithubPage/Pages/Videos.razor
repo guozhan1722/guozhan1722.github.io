@@ -1,0 +1,54 @@
+﻿@page "/videos"
+
+<h3>视频分享</h3>
+<!-- Buttons -->
+<button class="btn btn-primary m-1" @onclick='() => SelectContent("Video 1", "videos/marrage1_2026.mp4", "/downloads/file1.zip")'>
+    Show Video 1
+</button>
+
+<button class="btn btn-secondary m-1" @onclick='() => SelectContent("Video 2", "videos/marrage2_2026.mp4", "/downloads/file2.zip")'>
+    Show Video 2
+</button>
+
+<!-- Conditional Display Section -->
+@if (!string.IsNullOrEmpty(selectedVideoUrl))
+{
+    <div class="mt-4">
+        <h4>Now Playing: @selectedTitle</h4>
+        
+        <!-- Video Player -->
+        <video width="640" height="360" controls src="@selectedVideoUrl">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Download Link -->
+        <div class="mt-2">
+            <a class="btn btn-success" href="@selectedDownloadLink" download>
+                Download Video Resource
+            </a>
+        </div>
+    </div>
+}
+
+
+<video width="640" height="360" controls>
+    <source src="videos/0413-MaHui.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<a href="videos/0413-MaHui.mp4" download="Display_Name.mp4" target="_top">
+    Download Video
+</a>
+
+@code {
+    private string? selectedTitle;
+    private string? selectedVideoUrl;
+    private string? selectedDownloadLink;
+
+    private void SelectContent(string title, string videoUrl, string downloadLink)
+    {
+        selectedTitle = title;
+        selectedVideoUrl = videoUrl;
+        selectedDownloadLink = downloadLink;
+    }
+}
