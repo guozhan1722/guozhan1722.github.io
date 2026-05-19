@@ -2,7 +2,7 @@
 
 <h3>视频分享</h3>
 <!-- Buttons -->
-<button class="btn btn-primary m-1" @onclick='() => SelectContent("Video 1", "videos/marrage1_2026.mp4", "/downloads/file1.zip")'>
+<button class="btn btn-primary m-1" @onclick='() => SelectContent("Video 1", "https://drive.google.com/file/d/1fzLlgiKXyh1zlYnSlIHjWEJvGmSrjOKp/view?usp=sharing", "/downloads/file1.zip")'>
     Show Video 1
 </button>
 
@@ -17,6 +17,8 @@
         <h4>Now Playing: @selectedTitle</h4>
         
         <!-- Video Player -->
+        <iframe allowfullscreen="allowfullscreen" src="@selectedVideoUrl"></iframe>
+
         <video width="640" height="360" controls src="@selectedVideoUrl">
             Your browser does not support the video tag.
         </video>
