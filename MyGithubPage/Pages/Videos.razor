@@ -1,8 +1,9 @@
 ﻿@page "/videos"
+@using MyGithubPage.Models
 
 <h3>视频分享</h3>
 <!-- Buttons -->
-<button class="btn btn-primary m-1" @onclick='() => SelectContent("Video 1", "https://drive.google.com/file/d/1fzLlgiKXyh1zlYnSlIHjWEJvGmSrjOKp/view?usp=sharing", "/downloads/file1.zip")'>
+<button class="btn btn-primary m-1" @onclick='() => SelectContent("Video 1", "https://drive.google.com/file/d/1fzLlgiKXyh1zlYnSlIHjWEJvGmSrjOKp/preview", "/downloads/file1.zip")'>
     Show Video 1
 </button>
 
@@ -16,9 +17,8 @@
     <div class="mt-4">
         <h4>Now Playing: @selectedTitle</h4>
         
-        <!-- Video Player -->
-        <iframe allowfullscreen="allowfullscreen" src="@selectedVideoUrl"></iframe>
-
+        <iframe src="@selectedVideoUrl" width="640" height="480" sandbox="allow-scripts allow-same-origin"></iframe>
+        
         <video width="640" height="360" controls src="@selectedVideoUrl">
             Your browser does not support the video tag.
         </video>
@@ -32,25 +32,27 @@
     </div>
 }
 
-
-<video width="640" height="360" controls>
-    <source src="videos/0413-MaHui.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-
-<a href="videos/0413-MaHui.mp4" download="Display_Name.mp4" target="_top">
-    Download Video
-</a>
-
 @code {
+    private List<MediaItem> MediaItems = new List<MediaItem>();
+
     private string? selectedTitle;
     private string? selectedVideoUrl;
     private string? selectedDownloadLink;
 
     private void SelectContent(string title, string videoUrl, string downloadLink)
     {
+        MediaItem mediaItem = new MediaItem
+        {
+            Title = title,
+            Url = videoUrl,
+            //DownloadLink = downloadLink
+        };
+
+        MediaItems.Add(mediaItem);
+
         selectedTitle = title;
         selectedVideoUrl = videoUrl;
         selectedDownloadLink = downloadLink;
     }
 }
+
