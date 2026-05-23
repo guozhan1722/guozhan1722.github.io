@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MyGithubPage",
   "resources": {
-    "hash": "sha256-HpMRcr1dIQCfrgBzII0lgniWpV+epeQGKmfl8td+D0E=",
+    "hash": "sha256-ACfO0TVvLhRGlkLZBuhO934QyUC4+zcM94xXBerQMNc=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.jh7rch582k.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.4ijxm3lrf2.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
@@ -36,7 +36,7 @@
       "System.Text.Json.0q4iobub8j.wasm": "System.Text.Json.wasm",
       "System.Text.RegularExpressions.rs9b7ykfzr.wasm": "System.Text.RegularExpressions.wasm",
       "System.Private.CoreLib.2k6kj0aylq.wasm": "System.Private.CoreLib.wasm",
-      "MyGithubPage.yqyevnthoq.wasm": "MyGithubPage.wasm",
+      "MyGithubPage.iq9pziyw18.wasm": "MyGithubPage.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.xsn1d6x2kd.js": "dotnet.native.js",
       "dotnet.native.vz0adxojrz.wasm": "dotnet.native.wasm",
@@ -95,7 +95,7 @@
       "System.Text.Encodings.Web.jcc0mnauy4.wasm": "sha256-g/Cc00CC4N00kHv3CM4swNDmJiXIGFZ51wbyItw+7tw=",
       "System.Text.Json.0q4iobub8j.wasm": "sha256-aKxtmRJ3GkQvzPozSR+3MsRKihP5SHC6eJXAi2vIKUg=",
       "System.Text.RegularExpressions.rs9b7ykfzr.wasm": "sha256-WzXHMmZ1kz109jtctos7qA2Km7G32rQUz7UcatGJvCg=",
-      "MyGithubPage.yqyevnthoq.wasm": "sha256-avIA5vb3+9xbaZBFlxkNo4awGs6/p8Mh8KpfI4Xgs8c="
+      "MyGithubPage.iq9pziyw18.wasm": "sha256-dlfkjGLK0wWmRJH/feRso+6yp7wuuQkI3GCV+w1E6yU="
     }
   },
   "cacheBootResources": true,
