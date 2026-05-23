@@ -3,12 +3,12 @@
 
 <h3>视频分享</h3>
 <!-- Buttons -->
-<button class="btn btn-primary m-1" @onclick='() => SelectContent("Video 1", "https://drive.google.com/file/d/1fzLlgiKXyh1zlYnSlIHjWEJvGmSrjOKp/preview", "/downloads/file1.zip")'>
-    Show Video 1
+<button class="btn btn-primary m-1" @onclick='() => SelectContent("第一讲", "https://drive.google.com/file/d/1fzLlgiKXyh1zlYnSlIHjWEJvGmSrjOKp/preview", "https://drive.google.com/uc?export=download&id=1fzLlgiKXyh1zlYnSlIHjWEJvGmSrjOKp")'>
+    蒙神祝福的婚姻 第一讲
 </button>
 
-<button class="btn btn-secondary m-1" @onclick='() => SelectContent("Video 2", "videos/marrage2_2026.mp4", "/downloads/file2.zip")'>
-    Show Video 2
+<button class="btn btn-secondary m-1" @onclick='() => SelectContent("第二讲", "https://drive.google.com/file/d/1YYAGxnMAZn9LthCMFf8aY5OpWbt60tGz/preview", "https://drive.google.com/uc?export=download&id=1YYAGxnMAZn9LthCMFf8aY5OpWbt60tGz")'>
+    蒙神祝福的婚姻 第二讲
 </button>
 
 <!-- Conditional Display Section -->
@@ -19,10 +19,6 @@
         
         <iframe src="@selectedVideoUrl" width="640" height="480" sandbox="allow-scripts allow-same-origin"></iframe>
         
-        <video width="640" height="360" controls src="@selectedVideoUrl">
-            Your browser does not support the video tag.
-        </video>
-
         <!-- Download Link -->
         <div class="mt-2">
             <a class="btn btn-success" href="@selectedDownloadLink" download>
