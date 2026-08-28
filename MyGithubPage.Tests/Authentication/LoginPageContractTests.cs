@@ -27,6 +27,14 @@ public class LoginPageContractTests
         Assert.Contains("@Body", layout);
     }
 
+    [Fact]
+    public void LoginPage_BindsTypedCredentialsBeforeSubmit()
+    {
+        var source = File.ReadAllText(LoginPagePath());
+
+        Assert.Equal(2, source.Split("@bind:event=\"oninput\"").Length - 1);
+    }
+
     private static string LoginPagePath() => Path.GetFullPath(Path.Combine(
         AppContext.BaseDirectory, "..", "..", "..", "..", "MyGithubPage", "Pages",
         "Login.razor"));
