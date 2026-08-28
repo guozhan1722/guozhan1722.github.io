@@ -6,3 +6,4 @@
 bin/
 obj/
 .worktrees/
+.DS_Store
