@@ -55,14 +55,7 @@ public sealed class StaticAuthenticationStateProvider(
 
     public async Task LogoutAsync()
     {
-        try
-        {
-            await sessionStorage.RemoveAsync(SessionKey);
-        }
-        catch
-        {
-        }
-
+        await sessionStorage.RemoveAsync(SessionKey);
         NotifyAuthenticationStateChanged(Task.FromResult(AnonymousState()));
     }
 

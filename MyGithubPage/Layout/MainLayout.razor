@@ -16,6 +16,13 @@
             </AuthorizeView>
         </div>
 
+        @if (logoutErrorMessage is not null)
+        {
+            <div class="alert alert-danger mx-4 mt-3" role="alert">
+                @logoutErrorMessage
+            </div>
+        }
+
         <article class="content px-4">
             @Body
         </article>
@@ -23,9 +30,20 @@
 </div>
 
 @code {
+    private string? logoutErrorMessage;
+
     private async Task LogoutAsync()
     {
-        await AuthenticationStateProvider.LogoutAsync();
-        Navigation.NavigateTo("login", replace: true);
+        logoutErrorMessage = null;
+
+        try
+        {
+            await AuthenticationStateProvider.LogoutAsync();
+            Navigation.NavigateTo("login", replace: true);
+        }
+        catch
+        {
+            logoutErrorMessage = "We couldn't finish logging you out because your browser session couldn't be cleared. Close this tab to finish signing out.";
+        }
     }
 }
