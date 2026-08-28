@@ -160,3 +160,17 @@ main[b-cnzabv5j5e] {
         overflow-y: auto;
     }
 }
+/* /Pages/Login.razor.rz.scp.css */
+.login-page[b-wxz56tpkfw] {
+    align-items: center;
+    background: var(--bs-body-bg);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+.login-card[b-wxz56tpkfw] {
+    max-width: 26rem;
+    width: 100%;
+}
