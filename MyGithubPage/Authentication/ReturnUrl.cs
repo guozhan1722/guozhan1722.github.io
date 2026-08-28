@@ -25,9 +25,10 @@ public static class ReturnUrl
         if (string.IsNullOrEmpty(normalized) ||
             normalized.Contains('\\') ||
             Uri.TryCreate(normalized, UriKind.Absolute, out _) ||
-            normalized is "login" ||
-            normalized.StartsWith("login?", StringComparison.Ordinal) ||
-            normalized.StartsWith("login#", StringComparison.Ordinal))
+            string.Equals(normalized, "login", StringComparison.OrdinalIgnoreCase) ||
+            normalized.StartsWith("login?", StringComparison.OrdinalIgnoreCase) ||
+            normalized.StartsWith("login#", StringComparison.OrdinalIgnoreCase) ||
+            normalized.StartsWith("login/", StringComparison.OrdinalIgnoreCase))
         {
             return Home;
         }
