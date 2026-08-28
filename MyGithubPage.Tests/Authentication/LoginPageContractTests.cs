@@ -1,5 +1,7 @@
 namespace MyGithubPage.Tests.Authentication;
 
+using System.Text.RegularExpressions;
+
 public class LoginPageContractTests
 {
     [Fact]
@@ -32,7 +34,16 @@ public class LoginPageContractTests
     {
         var source = File.ReadAllText(LoginPagePath());
 
-        Assert.Equal(2, source.Split("@bind:event=\"oninput\"").Length - 1);
+        Assert.Matches(
+            new Regex(
+                "<input\\b(?=[^>]*\\bid=\"username\")(?=[^>]*@bind=\"credentials\\.Username\")(?=[^>]*@bind:event=\"oninput\")[^>]*>",
+                RegexOptions.Singleline),
+            source);
+        Assert.Matches(
+            new Regex(
+                "<input\\b(?=[^>]*\\bid=\"password\")(?=[^>]*@bind=\"credentials\\.Password\")(?=[^>]*@bind:event=\"oninput\")[^>]*>",
+                RegexOptions.Singleline),
+            source);
     }
 
     private static string LoginPagePath() => Path.GetFullPath(Path.Combine(

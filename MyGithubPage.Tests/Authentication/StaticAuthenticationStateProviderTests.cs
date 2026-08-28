@@ -1,4 +1,5 @@
 using MyGithubPage.Authentication;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace MyGithubPage.Tests.Authentication;
 
@@ -83,6 +84,67 @@ public class StaticAuthenticationStateProviderTests
             .User.Identity!.IsAuthenticated);
     }
 
+    [Fact]
+    public async Task LogoutAsync_RemovalFailureIsSurfacedWithoutPublishingLogout()
+    {
+        var settings = new LoginSettings("wccac", "123456");
+        var removalFailure = new InvalidOperationException("storage unavailable");
+        var storage = new FakeSessionStorage {
+            Value = settings.CreateFingerprint(),
+            RemoveException = removalFailure
+        };
+        var provider = CreateProvider(settings, storage);
+        Task<AuthenticationState>? publishedState = null;
+        provider.AuthenticationStateChanged += state => publishedState = state;
+
+        var thrown = await Assert.ThrowsAsync<InvalidOperationException>(
+            provider.LogoutAsync);
+
+        Assert.Same(removalFailure, thrown);
+        Assert.Null(publishedState);
+        Assert.True((await provider.GetAuthenticationStateAsync())
+            .User.Identity!.IsAuthenticated);
+        Assert.Equal(settings.CreateFingerprint(), storage.Value);
+    }
+
+    [Fact]
+    public async Task GetAuthenticationStateAsync_SettingsFailureReturnsAnonymous()
+    {
+        var provider = new StaticAuthenticationStateProvider(
+            new ThrowingSettingsService(),
+            new FakeSessionStorage { Value = "stored-fingerprint" });
+
+        Assert.False((await provider.GetAuthenticationStateAsync())
+            .User.Identity!.IsAuthenticated);
+    }
+
+    [Fact]
+    public async Task GetAuthenticationStateAsync_StorageReadFailureReturnsAnonymous()
+    {
+        var provider = CreateProvider(
+            new LoginSettings("wccac", "123456"),
+            new FakeSessionStorage {
+                GetException = new InvalidOperationException("storage unavailable")
+            });
+
+        Assert.False((await provider.GetAuthenticationStateAsync())
+            .User.Identity!.IsAuthenticated);
+    }
+
+    [Fact]
+    public async Task GetAuthenticationStateAsync_MismatchRemovalFailureReturnsAnonymous()
+    {
+        var storage = new FakeSessionStorage {
+            Value = new LoginSettings("wccac", "old").CreateFingerprint(),
+            RemoveException = new InvalidOperationException("storage unavailable")
+        };
+        var provider = CreateProvider(
+            new LoginSettings("wccac", "new"), storage);
+
+        Assert.False((await provider.GetAuthenticationStateAsync())
+            .User.Identity!.IsAuthenticated);
+    }
+
     private static StaticAuthenticationStateProvider CreateProvider(
         LoginSettings settings, FakeSessionStorage storage) =>
         new(new FakeSettingsService(settings), storage);
@@ -105,9 +167,19 @@ public class StaticAuthenticationStateProviderTests
     private sealed class FakeSessionStorage : ISessionStorage
     {
         public string? Value { get; set; }
+        public Exception? GetException { get; set; }
         public Exception? SetException { get; set; }
+        public Exception? RemoveException { get; set; }
 
-        public ValueTask<string?> GetAsync(string key) => ValueTask.FromResult(Value);
+        public ValueTask<string?> GetAsync(string key)
+        {
+            if (GetException is not null)
+            {
+                throw GetException;
+            }
+
+            return ValueTask.FromResult(Value);
+        }
 
         public ValueTask SetAsync(string key, string value)
         {
@@ -122,6 +194,11 @@ public class StaticAuthenticationStateProviderTests
 
         public ValueTask RemoveAsync(string key)
         {
+            if (RemoveException is not null)
+            {
+                throw RemoveException;
+            }
+
             Value = null;
             return ValueTask.CompletedTask;
         }
