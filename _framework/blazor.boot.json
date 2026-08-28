@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MyGithubPage",
   "resources": {
-    "hash": "sha256-t4Xm5Nb4AUa/o9QiuD8XvC4Y7+Dh6iWzLsJuA7U5SAA=",
+    "hash": "sha256-lHoCSAs7rv6VpI23YaMKwHKtohoLXyS4yO6W1ZgzR74=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Authorization.0e3s8263ue.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.ypzxtgwl5e.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -39,17 +39,17 @@
       "System.Net.Http.i2q1x4875l.wasm": "System.Net.Http.wasm",
       "System.Net.Primitives.nzsnn0aq8n.wasm": "System.Net.Primitives.wasm",
       "System.ObjectModel.whqggzeg15.wasm": "System.ObjectModel.wasm",
-      "System.Private.Uri.dw3qcm7o26.wasm": "System.Private.Uri.wasm",
+      "System.Private.Uri.ig9ve0wcca.wasm": "System.Private.Uri.wasm",
       "System.Runtime.InteropServices.JavaScript.hhwupg45hv.wasm": "System.Runtime.InteropServices.JavaScript.wasm",
-      "System.Runtime.hcpdphpz0x.wasm": "System.Runtime.wasm",
+      "System.Runtime.wwysqpsaug.wasm": "System.Runtime.wasm",
       "System.Security.Claims.u8o4c6j409.wasm": "System.Security.Claims.wasm",
       "System.Security.Cryptography.dm6fv5oypz.wasm": "System.Security.Cryptography.wasm",
       "System.Text.Encodings.Web.lj09apf4g1.wasm": "System.Text.Encodings.Web.wasm",
       "System.Text.Json.18pb50n1jc.wasm": "System.Text.Json.wasm",
       "System.Text.RegularExpressions.nx73kmrs9d.wasm": "System.Text.RegularExpressions.wasm",
       "System.w40v23gp3a.wasm": "System.wasm",
-      "System.Private.CoreLib.ui8qy5125r.wasm": "System.Private.CoreLib.wasm",
-      "MyGithubPage.zirya9dn9f.wasm": "MyGithubPage.wasm",
+      "System.Private.CoreLib.ngm1xkwyl8.wasm": "System.Private.CoreLib.wasm",
+      "MyGithubPage.l3aqtlfl6u.wasm": "MyGithubPage.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.wlvwu26j41.js": "dotnet.native.js",
       "dotnet.native.kiufslnrq2.wasm": "dotnet.native.wasm",
@@ -74,7 +74,7 @@
     },
     "coreAssembly": {
       "System.Runtime.InteropServices.JavaScript.hhwupg45hv.wasm": "sha256-C4cuQuTP78aiOgkhY79qq+DcgktJVXD0Rpzlcqd4tsM=",
-      "System.Private.CoreLib.ui8qy5125r.wasm": "sha256-ptNr6q0kUEkhdqUgaZ23ng75Ezw7//XMpDmk5kJCCGA="
+      "System.Private.CoreLib.ngm1xkwyl8.wasm": "sha256-9zi/bytV1I5GebMVd7g6LoCnukZu9lnrE8ED/uTBRZQ="
     },
     "assembly": {
       "Microsoft.AspNetCore.Authorization.0e3s8263ue.wasm": "sha256-KHAhiyHqzcJ+mV4T07vZWnD0C8UrODnZq9Nul+D0Qh4=",
@@ -113,15 +113,15 @@
       "System.Net.Http.i2q1x4875l.wasm": "sha256-xjQhy+xqM82fTXjWfNEqEq7czEH/69eqcXRQ8HwpSu4=",
       "System.Net.Primitives.nzsnn0aq8n.wasm": "sha256-fXb014HTmPeOIAbf5mwstd5zfuTc/NVuNmsMkhEAbok=",
       "System.ObjectModel.whqggzeg15.wasm": "sha256-JEamRP5tnvYjHtE6bEkykf+sUU11b7pXYHHwo9cD4ZI=",
-      "System.Private.Uri.dw3qcm7o26.wasm": "sha256-PaqZcrXnfqk1LZO7+JOixS8fsTQMvnG2lmEBL6DZNWs=",
-      "System.Runtime.hcpdphpz0x.wasm": "sha256-ka5eeYcraXls5eGVcr+cTNxDVjSYG8/2B2pJVK2T/IA=",
+      "System.Private.Uri.ig9ve0wcca.wasm": "sha256-XvCxfwUa+NGTYcNAaShPTrJUVY8RLKbUqVFHihqKl08=",
+      "System.Runtime.wwysqpsaug.wasm": "sha256-wD07T79hkvNf7f04M4avS1ogWEN/eNOMCvW9HmV47VI=",
       "System.Security.Claims.u8o4c6j409.wasm": "sha256-vueRmq5RAwQ+3H7yFo1oCbdtkSN0vJU/VHYConQh2DU=",
       "System.Security.Cryptography.dm6fv5oypz.wasm": "sha256-u32S0MblfdbRp7acHjjjV1kURaGqjPg9IvEH9VLaMsY=",
       "System.Text.Encodings.Web.lj09apf4g1.wasm": "sha256-/1ZwMLgugRWSt+5QMn6mIPROgt1U1lVUCA8gdF7q2QQ=",
       "System.Text.Json.18pb50n1jc.wasm": "sha256-cSmUnytLdKhlLFrN53qVoIP747oZf87MzWzxUcLnq0U=",
       "System.Text.RegularExpressions.nx73kmrs9d.wasm": "sha256-FVlQhZOTFhS6RX8Bd7ulBgips4mGmRGAxWixue4XkDY=",
       "System.w40v23gp3a.wasm": "sha256-cIBJAKdiktlvxbM24Ex0iujEEkSp1KIeoyzJ27gJ4YY=",
-      "MyGithubPage.zirya9dn9f.wasm": "sha256-21055Arbp54/jREvmkuN6TG/8blpD9TRTfHKTswFHm8="
+      "MyGithubPage.l3aqtlfl6u.wasm": "sha256-X2n7Z2EgToafnddEwwyv0gHCxQlwqvTHyyOSOqzTsN8="
     }
   },
   "cacheBootResources": true,
