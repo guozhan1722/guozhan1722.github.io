@@ -1,0 +1,88 @@
+@page "/login"
+@attribute [AllowAnonymous]
+@layout LoginLayout
+@inject StaticAuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+<PageTitle>Log in</PageTitle>
+
+<main class="login-page">
+    <section class="card shadow-sm login-card" aria-labelledby="login-heading">
+        <div class="card-body p-4">
+            <h1 id="login-heading" class="h3 mb-4">Log in</h1>
+
+            <EditForm Model="credentials" OnValidSubmit="LoginAsync">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" />
+
+                @if (errorMessage is not null)
+                {
+                    <div class="alert alert-danger" role="alert">@errorMessage</div>
+                }
+
+                <div class="mb-3">
+                    <label class="form-label" for="username">Username</label>
+                    <InputText id="username" class="form-control" autocomplete="username"
+                               @bind-Value="credentials.Username" />
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label" for="password">Password</label>
+                    <InputText id="password" class="form-control" type="password"
+                               autocomplete="current-password"
+                               @bind-Value="credentials.Password" />
+                </div>
+
+                <button class="btn btn-primary w-100" type="submit" disabled="@isSubmitting">
+                    @(isSubmitting ? "Logging in…" : "Log in")
+                </button>
+            </EditForm>
+        </div>
+    </section>
+</main>
+
+@code {
+    [SupplyParameterFromQuery]
+    private string? returnUrl { get; set; }
+
+    private readonly LoginCredentials credentials = new();
+    private string? errorMessage;
+    private bool isSubmitting;
+
+    private async Task LoginAsync()
+    {
+        errorMessage = null;
+        isSubmitting = true;
+
+        try
+        {
+            if (await AuthenticationStateProvider.LoginAsync(
+                    credentials.Username, credentials.Password))
+            {
+                Navigation.NavigateTo(ReturnUrl.Normalize(returnUrl), replace: true);
+                return;
+            }
+
+            credentials.Password = string.Empty;
+            errorMessage = "Invalid username or password.";
+        }
+        catch
+        {
+            credentials.Password = string.Empty;
+            errorMessage = "Login is unavailable because the site configuration could not be loaded.";
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+
+    private sealed class LoginCredentials
+    {
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Username { get; set; } = string.Empty;
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Password { get; set; } = string.Empty;
+    }
+}

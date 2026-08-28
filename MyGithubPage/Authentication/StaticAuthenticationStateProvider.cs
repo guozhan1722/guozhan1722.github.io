@@ -38,27 +38,19 @@ public sealed class StaticAuthenticationStateProvider(
 
     public async Task<bool> LoginAsync(string username, string password)
     {
-        try
+        var settings = await loginSettingsService.GetAsync();
+        if (!string.Equals(username, settings.Username,
+                StringComparison.Ordinal) ||
+            !string.Equals(password, settings.Password,
+                StringComparison.Ordinal))
         {
-            var settings = await loginSettingsService.GetAsync();
-            if (!string.Equals(username, settings.Username,
-                    StringComparison.Ordinal) ||
-                !string.Equals(password, settings.Password,
-                    StringComparison.Ordinal))
-            {
-                return false;
-            }
-
-            await sessionStorage.SetAsync(SessionKey, settings.CreateFingerprint());
-            NotifyAuthenticationStateChanged(
-                Task.FromResult(AuthenticatedState(settings.Username)));
-            return true;
-        }
-        catch
-        {
-            NotifyAuthenticationStateChanged(Task.FromResult(AnonymousState()));
             return false;
         }
+
+        await sessionStorage.SetAsync(SessionKey, settings.CreateFingerprint());
+        NotifyAuthenticationStateChanged(
+            Task.FromResult(AuthenticatedState(settings.Username)));
+        return true;
     }
 
     public async Task LogoutAsync()

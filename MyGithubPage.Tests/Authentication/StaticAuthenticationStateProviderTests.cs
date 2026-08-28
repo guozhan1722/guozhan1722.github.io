@@ -30,6 +30,29 @@ public class StaticAuthenticationStateProviderTests
     }
 
     [Fact]
+    public async Task LoginAsync_PropagatesConfigurationFailure()
+    {
+        var provider = new StaticAuthenticationStateProvider(
+            new ThrowingSettingsService(), new FakeSessionStorage());
+
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => provider.LoginAsync("wccac", "123456"));
+    }
+
+    [Fact]
+    public async Task LoginAsync_PropagatesSessionStorageFailure()
+    {
+        var storage = new FakeSessionStorage {
+            SetException = new InvalidOperationException("storage unavailable")
+        };
+        var provider = CreateProvider(
+            new LoginSettings("wccac", "123456"), storage);
+
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => provider.LoginAsync("wccac", "123456"));
+    }
+
+    [Fact]
     public async Task ChangedFingerprint_InvalidatesStoredSession()
     {
         var storage = new FakeSessionStorage {
@@ -71,14 +94,28 @@ public class StaticAuthenticationStateProviderTests
             CancellationToken cancellationToken = default) => Task.FromResult(value);
     }
 
+    private sealed class ThrowingSettingsService : ILoginSettingsService
+    {
+        public Task<LoginSettings> GetAsync(
+            CancellationToken cancellationToken = default) =>
+            Task.FromException<LoginSettings>(
+                new InvalidOperationException("settings unavailable"));
+    }
+
     private sealed class FakeSessionStorage : ISessionStorage
     {
         public string? Value { get; set; }
+        public Exception? SetException { get; set; }
 
         public ValueTask<string?> GetAsync(string key) => ValueTask.FromResult(Value);
 
         public ValueTask SetAsync(string key, string value)
         {
+            if (SetException is not null)
+            {
+                throw SetException;
+            }
+
             Value = value;
             return ValueTask.CompletedTask;
         }
