@@ -1,0 +1,13 @@
+.login-page {
+    align-items: center;
+    background: var(--bs-body-bg);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+.login-card {
+    max-width: 26rem;
+    width: 100%;
+}
